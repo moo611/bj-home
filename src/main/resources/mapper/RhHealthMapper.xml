@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bjhome.mapper.RhHealthMapper">
+
+    <resultMap type="com.example.bjhome.domain.RhHealth" id="RhHealthResult">
+        <result property="id"    column="id"    />
+        <result property="username"    column="username"    />
+        <result property="bloodPressure"    column="blood_pressure"    />
+        <result property="weight"    column="weight"    />
+        <result property="height"    column="height"    />
+        <result property="heartRate"    column="heart_rate"    />
+        <result property="bloodSugar"    column="blood_sugar"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="sex"    column="sex"    />
+        <result property="age"    column="age"    />
+        <result property="username"    column="username"    />
+    </resultMap>
+
+    <sql id="selectRhHealthVo">
+        select id, username, blood_pressure, weight, height, heart_rate, blood_sugar, del_flag, create_time, create_by, update_time, update_by from rh_health
+    </sql>
+
+    <select id="selectRhHealthList" parameterType="com.example.bjhome.domain.RhHealth" resultMap="RhHealthResult">
+        select a.id, a.username, a.blood_pressure, a.weight, a.height, a.heart_rate, a.blood_sugar, b.sex,b.age,b.nickname from rh_health a
+        left join rh_user b on a.username = b.username
+        <where>a.del_flag='0'
+            <if test="username != null  and username != ''"> and a.username like concat('%', #{username}, '%')</if>
+
+        </where>
+        order by a.create_time desc
+    </select>
+
+    <select id="selectRhHealthById" parameterType="long" resultMap="RhHealthResult">
+        <include refid="selectRhHealthVo"/>
+        where del_flag='0' and id = #{id}
+    </select>
+
+
+    <select id="selectRhHealthByUsername" parameterType="string" resultMap="RhHealthResult">
+        <include refid="selectRhHealthVo"/>
+        where del_flag='0' and username = #{username}
+    </select>
+    <insert id="insertRhHealth" parameterType="com.example.bjhome.domain.RhHealth" useGeneratedKeys="true" keyProperty="id">
+        insert into rh_health
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username != null">username,</if>
+            <if test="bloodPressure != null">blood_pressure,</if>
+            <if test="weight != null">weight,</if>
+            <if test="height != null">height,</if>
+            <if test="heartRate != null">heart_rate,</if>
+            <if test="bloodSugar != null">blood_sugar,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateBy != null">update_by,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="username != null">#{username},</if>
+            <if test="bloodPressure != null">#{bloodPressure},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="height != null">#{height},</if>
+            <if test="heartRate != null">#{heartRate},</if>
+            <if test="bloodSugar != null">#{bloodSugar},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+        </trim>
+    </insert>
+
+    <update id="updateRhHealth" parameterType="com.example.bjhome.domain.RhHealth">
+        update rh_health
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="username != null">username = #{username},</if>
+            <if test="bloodPressure != null">blood_pressure = #{bloodPressure},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="height != null">height = #{height},</if>
+            <if test="heartRate != null">heart_rate = #{heartRate},</if>
+            <if test="bloodSugar != null">blood_sugar = #{bloodSugar},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteRhHealthById" parameterType="long">
+        update rh_health set del_flag='2' where id = #{id}
+    </delete>
+
+    <delete id="deleteRhHealthByIds" parameterType="long">
+        update rh_health set del_flag='2' where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
