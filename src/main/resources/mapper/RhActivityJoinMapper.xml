@@ -14,6 +14,9 @@
         <result property="createBy"    column="create_by"    />
         <result property="updateTime"    column="update_time"    />
         <result property="updateBy"    column="update_by"    />
+        <result property="activityName"    column="name"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
     </resultMap>
 
     <sql id="selectRhActivityJoinVo">
@@ -21,12 +24,14 @@
     </sql>
 
     <select id="selectRhActivityJoinList" parameterType="com.example.bjhome.domain.RhActivityJoin" resultMap="RhActivityJoinResult">
-        <include refid="selectRhActivityJoinVo"/>
+        select a.id, a.activity_id, a.username, a.type, b.name,b.start_time,b.end_time from rh_activity_join a
+        left join rh_activity b on a.activity_id=b.id
         <where>
-            <if test="activityId != null "> and activity_id = #{activityId}</if>
-            <if test="username != null  and username != ''"> and username like concat('%', #{username}, '%')</if>
-            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="activityId != null "> and a.activity_id = #{activityId}</if>
+            <if test="username != null  and username != ''"> and a.username = #{username}</if>
+            <if test="type != null  and type != ''"> and a.type = #{type}</if>
         </where>
+        order by a.create_time desc
     </select>
 
     <select id="selectRhActivityJoinById" parameterType="long" resultMap="RhActivityJoinResult">

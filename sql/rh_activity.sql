@@ -11,7 +11,7 @@
  Target Server Version : 80028
  File Encoding         : 65001
 
- Date: 16/03/2025 16:49:13
+ Date: 25/03/2025 13:48:30
 */
 
 SET NAMES utf8mb4;
@@ -33,10 +33,11 @@ CREATE TABLE `rh_activity`  (
   `update_time` datetime NULL DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of rh_activity
 -- ----------------------------
+INSERT INTO `rh_activity` VALUES (1, '老年人象棋比赛', '促进老年人日常文化交流', '2025-03-01', '2025-04-06', '0', '2025-03-24 15:40:33', NULL, '2025-03-24 15:41:46', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

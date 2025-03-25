@@ -25,26 +25,26 @@ public interface RhUserMapper
     /**
      * 查询用户列表
      *
-     * @param sptUser 用户
+     * @param rhUser 用户
      * @return 用户集合
      */
-    public List<RhUser> selectRhUserList(RhUser sptUser);
+    public List<RhUser> selectRhUserList(RhUser rhUser);
 
     /**
      * 新增用户
      *
-     * @param sptUser 用户
+     * @param rhUser 用户
      * @return 结果
      */
-    public int insertRhUser(RhUser sptUser);
+    public int insertRhUser(RhUser rhUser);
 
     /**
      * 修改用户
      *
-     * @param sptUser 用户
+     * @param rhUser 用户
      * @return 结果
      */
-    public int updateRhUser(RhUser sptUser);
+    public int updateRhUser(RhUser rhUser);
 
     /**
      * 删除用户

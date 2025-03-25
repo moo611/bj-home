@@ -5,4 +5,6 @@ import lombok.Data;
 
 @Data
 public class RhReserveListReq extends BaseReq {
+
+    String username;
 }

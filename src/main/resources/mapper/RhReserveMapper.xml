@@ -14,6 +14,8 @@
         <result property="createBy"    column="create_by"    />
         <result property="updateTime"    column="update_time"    />
         <result property="updateBy"    column="update_by"    />
+        <result property="serverName"    column="server_name"    />
+        <result property="serviceName"    column="service_name"    />
     </resultMap>
 
     <sql id="selectRhReserveVo">
@@ -21,13 +23,32 @@
     </sql>
 
     <select id="selectRhReserveList" parameterType="com.example.bjhome.domain.RhReserve" resultMap="RhReserveResult">
-        <include refid="selectRhReserveVo"/>
+        select
+        a.id,
+        a.service_id,
+        a.service_date,
+        a.username,
+        b.name as service_name,
+        c.nickname as server_name
+        from rh_reserve a
+        left join rh_service b on a.service_id = b.id
+        left join rh_user c on b.server = c.username
         <where>
-            <if test="serviceId != null "> and service_id = #{serviceId}</if>
-            <if test="serviceDate != null "> and service_date = #{serviceDate}</if>
-            <if test="username != null  and username != ''"> and username like concat('%', #{username}, '%')</if>
+            <if test="serviceId != null ">
+                and a.service_id = #{serviceId}
+            </if>
+            <if test="username != null  and username != ''">
+                and a.username = #{username}
+            </if>
         </where>
+        order by
+        CASE
+        WHEN DATE(a.service_date) = CURDATE() THEN 1
+        ELSE 2
+        END,
+        a.create_time desc
     </select>
+
 
     <select id="selectRhReserveById" parameterType="long" resultMap="RhReserveResult">
         <include refid="selectRhReserveVo"/>

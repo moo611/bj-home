@@ -53,6 +53,14 @@ public class RhReserveServiceImpl implements IRhReserveService
     @Override
     public int insertRhReserve(RhReserve rhReserve)
     {
+        RhReserve query = new RhReserve();
+        query.setServiceId(rhReserve.getServiceId());
+        query.setUsername(rhReserve.getUsername());
+        List<RhReserve>rhReserves = rhReserveMapper.selectRhReserveList(query);
+        if (rhReserves.size() > 0){
+            return -32001;
+        }
+
         rhReserve.setCreateTime(new Date());
         return rhReserveMapper.insertRhReserve(rhReserve);
     }

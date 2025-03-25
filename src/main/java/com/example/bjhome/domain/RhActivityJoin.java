@@ -2,6 +2,9 @@ package com.example.bjhome.domain;
 
 
 import com.example.bjhome.domain.base.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
 
 /**
  * 活动参与对象 rh_activity_join
@@ -27,6 +30,38 @@ public class RhActivityJoin extends BaseEntity
     /** 0、报名1、签到 */
     
     private String type;
+
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    String activityName;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    Date startTime;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    Date endTime;
 
     /** 删除标识 */
     private String delFlag;

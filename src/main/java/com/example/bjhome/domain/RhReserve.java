@@ -23,13 +23,33 @@ public class RhReserve extends BaseEntity
     private Long serviceId;
 
     /** 预约时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date serviceDate;
 
     /** 预约人 */
     
     private String username;
+
+
+    public String getServerName() {
+        return serverName;
+    }
+
+    public void setServerName(String serverName) {
+        this.serverName = serverName;
+    }
+
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
+
+    String serverName;
+
+    String serviceName;
 
     /** 删除标识 */
     private String delFlag;

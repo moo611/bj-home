@@ -73,7 +73,13 @@ public class RhActivityJoinController extends BaseController {
 
     @PostMapping
     public AjaxResult add(@RequestBody RhActivityJoin rhActivityJoin) {
-        return toAjax(rhActivityJoinService.insertRhActivityJoin(rhActivityJoin));
+        int rows = rhActivityJoinService.insertRhActivityJoin(rhActivityJoin);
+
+        if (rows == -32001) {
+            return AjaxResult.error("您已经报名过了");
+        }
+
+        return toAjax(rows);
     }
 
     /**

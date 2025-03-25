@@ -20,7 +20,7 @@ import java.util.List;
 public class RhUserServiceImpl implements IRhUserService
 {
     @Autowired
-    private RhUserMapper sptUserMapper;
+    private RhUserMapper rhUserMapper;
     @Autowired
     private PasswordEncoder passwordEncoder;  // 注入 PasswordEncode
     /**
@@ -32,58 +32,58 @@ public class RhUserServiceImpl implements IRhUserService
     @Override
     public RhUser selectRhUserById(Long id)
     {
-        return sptUserMapper.selectRhUserById(id);
+        return rhUserMapper.selectRhUserById(id);
     }
 
     /**
      * 查询用户列表
      *
-     * @param sptUser 用户
+     * @param rhUser 用户
      * @return 用户
      */
     @Override
-    public List<RhUser> selectRhUserList(RhUser sptUser)
+    public List<RhUser> selectRhUserList(RhUser rhUser)
     {
-        return sptUserMapper.selectRhUserList(sptUser);
+        return rhUserMapper.selectRhUserList(rhUser);
     }
 
     /**
      * 新增用户
      *
-     * @param sptUser 用户
+     * @param rhUser 用户
      * @return 结果
      */
     @Override
-    public int insertRhUser(RhUser sptUser)
+    public int insertRhUser(RhUser rhUser)
     {
-        RhUser old = sptUserMapper.selectRhUserByUsername(sptUser.getUsername());
+        RhUser old = rhUserMapper.selectRhUserByUsername(rhUser.getUsername());
         if (old != null){
             return -32001;
         }
-        String encodedPassword = passwordEncoder.encode(sptUser.getPassword());
-        sptUser.setPassword(encodedPassword);
-        sptUser.setCreateTime(new Date());
+        String encodedPassword = passwordEncoder.encode(rhUser.getPassword());
+        rhUser.setPassword(encodedPassword);
+        rhUser.setCreateTime(new Date());
         
-        return sptUserMapper.insertRhUser(sptUser);
+        return rhUserMapper.insertRhUser(rhUser);
     }
 
     /**
      * 修改用户
      *
-     * @param sptUser 用户
+     * @param rhUser 用户
      * @return 结果
      */
     @Override
-    public int updateRhUser(RhUser sptUser)
+    public int updateRhUser(RhUser rhUser)
     {
 
-        RhUser old = sptUserMapper.selectRhUserByUsername(sptUser.getUsername());
-        if (!old.getId().equals(sptUser.getId())){
+        RhUser old = rhUserMapper.selectRhUserByUsername(rhUser.getUsername());
+        if (!old.getId().equals(rhUser.getId())){
             return -32001;
         }
 
-        sptUser.setUpdateTime(new Date());
-        return sptUserMapper.updateRhUser(sptUser);
+        rhUser.setUpdateTime(new Date());
+        return rhUserMapper.updateRhUser(rhUser);
     }
 
     /**
@@ -95,7 +95,7 @@ public class RhUserServiceImpl implements IRhUserService
     @Override
     public int deleteRhUserByIds(Long[] ids)
     {
-        return sptUserMapper.deleteRhUserByIds(ids);
+        return rhUserMapper.deleteRhUserByIds(ids);
     }
 
     /**
@@ -107,11 +107,11 @@ public class RhUserServiceImpl implements IRhUserService
     @Override
     public int deleteRhUserById(Long id)
     {
-        return sptUserMapper.deleteRhUserById(id);
+        return rhUserMapper.deleteRhUserById(id);
     }
 
     @Override
     public RhUser selectRtUserByUsername(String username) {
-        return sptUserMapper.selectRhUserByUsername(username);
+        return rhUserMapper.selectRhUserByUsername(username);
     }
 }

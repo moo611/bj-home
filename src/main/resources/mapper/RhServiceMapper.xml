@@ -13,18 +13,22 @@
         <result property="createBy"    column="create_by"    />
         <result property="updateTime"    column="update_time"    />
         <result property="updateBy"    column="update_by"    />
+        <result property="server"    column="server"    />
+        <result property="serverName"    column="nickname"    />
     </resultMap>
 
     <sql id="selectRhServiceVo">
-        select id, name, description, del_flag, create_time, create_by, update_time, update_by from rh_service
+        select id, name, description, del_flag, create_time, create_by, update_time, update_by,server from rh_service
     </sql>
 
     <select id="selectRhServiceList" parameterType="com.example.bjhome.domain.RhService" resultMap="RhServiceResult">
-        <include refid="selectRhServiceVo"/>
-        <where>del_flag='0'
-            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
-            <if test="description != null  and description != ''"> and description = #{description}</if>
+        select a.id, a.name, a.description, a.server, b.nickname from rh_service a
+        left join rh_user b on a.server = b.username
+        <where>a.del_flag='0'
+            <if test="name != null  and name != ''"> and a.name like concat('%', #{name}, '%')</if>
+            <if test="description != null  and description != ''"> and a.description = #{description}</if>
         </where>
+        order by a.create_time desc
     </select>
 
     <select id="selectRhServiceById" parameterType="long" resultMap="RhServiceResult">
@@ -36,6 +40,7 @@
         insert into rh_service
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="name != null">name,</if>
+            <if test="server != null">server,</if>
             <if test="description != null">description,</if>
             <if test="delFlag != null">del_flag,</if>
             <if test="createTime != null">create_time,</if>
@@ -45,6 +50,7 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="name != null">#{name},</if>
+            <if test="server != null">#{server},</if>
             <if test="description != null">#{description},</if>
             <if test="delFlag != null">#{delFlag},</if>
             <if test="createTime != null">#{createTime},</if>
@@ -58,6 +64,7 @@
         update rh_service
         <trim prefix="SET" suffixOverrides=",">
             <if test="name != null">name = #{name},</if>
+            <if test="server != null">server = #{server},</if>
             <if test="description != null">description = #{description},</if>
             <if test="delFlag != null">del_flag = #{delFlag},</if>
             <if test="createTime != null">create_time = #{createTime},</if>

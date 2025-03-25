@@ -54,6 +54,14 @@ public class RhActivityJoinServiceImpl implements IRhActivityJoinService
     @Override
     public int insertRhActivityJoin(RhActivityJoin rhActivityJoin)
     {
+        RhActivityJoin query = new RhActivityJoin();
+        query.setUsername(rhActivityJoin.getUsername());
+        query.setActivityId(rhActivityJoin.getActivityId());
+        List<RhActivityJoin>rhActivityJoinList=rhActivityJoinMapper.selectRhActivityJoinList(query);
+        if (!rhActivityJoinList.isEmpty()){
+            return -32001;
+        }
+
         rhActivityJoin.setCreateTime(new Date());
         return rhActivityJoinMapper.insertRhActivityJoin(rhActivityJoin);
     }

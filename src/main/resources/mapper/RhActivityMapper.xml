@@ -29,6 +29,7 @@
             <if test="startTime != null "> and start_time = #{startTime}</if>
             <if test="endTime != null "> and end_time = #{endTime}</if>
         </where>
+        order by create_time desc
     </select>
 
     <select id="selectRhActivityById" parameterType="long" resultMap="RhActivityResult">

@@ -11,7 +11,7 @@
  Target Server Version : 80028
  File Encoding         : 65001
 
- Date: 16/03/2025 16:49:27
+ Date: 25/03/2025 13:48:45
 */
 
 SET NAMES utf8mb4;
@@ -32,10 +32,12 @@ CREATE TABLE `rh_reserve`  (
   `update_time` datetime NULL DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of rh_reserve
 -- ----------------------------
+INSERT INTO `rh_reserve` VALUES (2, 2, '2025-03-25 10:03:00', 'user1', '0', '2025-03-25 11:06:39', NULL, NULL, NULL);
+INSERT INTO `rh_reserve` VALUES (3, 1, '2025-03-26 00:00:00', 'user1', '0', '2025-03-25 11:44:08', NULL, NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

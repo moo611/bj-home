@@ -78,7 +78,11 @@ public class RhReserveController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody RhReserve rhReserve)
     {
-        return toAjax(rhReserveService.insertRhReserve(rhReserve));
+        int rows = rhReserveService.insertRhReserve(rhReserve);
+        if (rows == -32001){
+            return AjaxResult.error("已经预约过了");
+        }
+        return toAjax(rows);
     }
 
     /**

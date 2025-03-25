@@ -24,6 +24,27 @@ public class RhService extends BaseEntity
     
     private String description;
 
+    public String getServerName() {
+        return serverName;
+    }
+
+    public void setServerName(String serverName) {
+        this.serverName = serverName;
+    }
+
+    String serverName;
+
+    public String getServer() {
+        return server;
+    }
+
+    public void setServer(String server) {
+        this.server = server;
+    }
+
+    String server;
+
+
     /** 删除标识 */
     private String delFlag;
 

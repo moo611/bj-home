@@ -1,6 +1,8 @@
 package com.example.bjhome.domain;
 
 import com.example.bjhome.domain.base.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
 
 import java.util.Date;
 
@@ -27,11 +29,11 @@ public class RhActivity extends BaseEntity
     private String description;
 
     /** $column.columnComment */
-    
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date startTime;
 
     /** $column.columnComment */
-    
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date endTime;
 
     /** 删除标识 */
