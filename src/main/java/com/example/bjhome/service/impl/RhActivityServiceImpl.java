@@ -2,6 +2,8 @@ package com.example.bjhome.service.impl;
 
 import java.util.Date;
 import java.util.List;
+
+import com.example.bjhome.config.auth.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.bjhome.mapper.RhActivityMapper;
@@ -54,6 +56,7 @@ public class RhActivityServiceImpl implements IRhActivityService
     public int insertRhActivity(RhActivity rhActivity)
     {
         rhActivity.setCreateTime(new Date());
+        rhActivity.setCreateBy(UserUtil.getCurrentUsername());
         return rhActivityMapper.insertRhActivity(rhActivity);
     }
 
@@ -67,6 +70,7 @@ public class RhActivityServiceImpl implements IRhActivityService
     public int updateRhActivity(RhActivity rhActivity)
     {
         rhActivity.setUpdateTime(new Date());
+        rhActivity.setUpdateBy(UserUtil.getCurrentUsername());
         return rhActivityMapper.updateRhActivity(rhActivity);
     }
 

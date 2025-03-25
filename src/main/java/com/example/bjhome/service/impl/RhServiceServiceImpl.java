@@ -2,6 +2,8 @@ package com.example.bjhome.service.impl;
 
 import java.util.Date;
 import java.util.List;
+
+import com.example.bjhome.config.auth.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.bjhome.mapper.RhServiceMapper;
@@ -54,6 +56,7 @@ public class RhServiceServiceImpl implements IRhServiceService
     public int insertRhService(RhService rhService)
     {
         rhService.setCreateTime(new Date());
+        rhService.setCreateBy(UserUtil.getCurrentUsername());
         return rhServiceMapper.insertRhService(rhService);
     }
 
@@ -67,6 +70,7 @@ public class RhServiceServiceImpl implements IRhServiceService
     public int updateRhService(RhService rhService)
     {
         rhService.setUpdateTime(new Date());
+        rhService.setUpdateBy(UserUtil.getCurrentUsername());
         return rhServiceMapper.updateRhService(rhService);
     }
 
