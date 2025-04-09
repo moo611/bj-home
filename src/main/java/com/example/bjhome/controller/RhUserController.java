@@ -169,10 +169,10 @@ public class RhUserController extends BaseController {
 
                 // 创建表头行
                 Row headerRow = sheet.createRow(0);
-                headerRow.createCell(0).setCellValue("用户名");
-                headerRow.createCell(1).setCellValue("昵称");
-                headerRow.createCell(2).setCellValue("年龄");
-                headerRow.createCell(3).setCellValue("性别");
+
+                headerRow.createCell(0).setCellValue("昵称");
+                headerRow.createCell(1).setCellValue("年龄");
+                headerRow.createCell(2).setCellValue("性别");
 
                 int rows = list.size();
 
@@ -180,15 +180,14 @@ public class RhUserController extends BaseController {
                 for (int i = 0; i < rows; i++) {
                     Row row = sheet.createRow(i + 1);
 
-                    row.createCell(0).setCellValue(list.get(i).getUsername());
-                    row.createCell(1).setCellValue(list.get(i).getNickname());
-                    row.createCell(2).setCellValue(list.get(i).getAge());
+                    row.createCell(0).setCellValue(list.get(i).getNickname());
+                    row.createCell(1).setCellValue(list.get(i).getAge());
                     String sex = "男";
 
                     if (list.get(i).getSex().equals("1")) {
                         sex = "女";
                     }
-                    row.createCell(3).setCellValue(sex);
+                    row.createCell(2).setCellValue(sex);
                 }
 
                 // 设置响应头
