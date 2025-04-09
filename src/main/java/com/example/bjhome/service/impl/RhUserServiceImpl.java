@@ -6,6 +6,7 @@ import com.example.bjhome.service.IRhUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -113,5 +114,20 @@ public class RhUserServiceImpl implements IRhUserService
     @Override
     public RhUser selectRtUserByUsername(String username) {
         return rhUserMapper.selectRhUserByUsername(username);
+    }
+
+    @Override
+    @Transactional
+    public void batchInsert(List<RhUser> users) {
+
+        for (RhUser user : users) {
+            user.setCreateTime(new Date());
+            user.setRole("2");
+            user.setPassword(passwordEncoder.encode("123456"));
+            rhUserMapper.insertRhUser(user);
+
+        }
+
+
     }
 }

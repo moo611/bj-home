@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 ).permitAll()
                 .antMatchers("/user/login", "/user").permitAll() // 允许这些路径无需认证
                 .antMatchers(HttpMethod.POST, "/user").permitAll() // 允许POST /user请求
-                .antMatchers("/record/export").permitAll()
+                .antMatchers("/user/export").permitAll()
                 .anyRequest().authenticated()
                 .and().exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint) // 自定义 AuthenticationEntryPoint
                 .and().sessionManagement()

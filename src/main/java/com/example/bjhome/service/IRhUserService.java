@@ -61,4 +61,6 @@ public interface IRhUserService
     public int deleteRhUserById(Long id);
 
     RhUser selectRtUserByUsername(String username);
+
+    void batchInsert(List<RhUser> users);
 }
